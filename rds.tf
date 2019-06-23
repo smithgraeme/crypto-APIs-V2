@@ -21,7 +21,7 @@ resource "aws_db_instance" "crypto-API-V2-RDS-DB" {
   engine               = "mysql"
   engine_version       = "5.7"
   instance_class       = "db.t2.micro"
-  name                 = "cryptoAPIV2${terraform.workspace}"
+  name                 = "cryptocurrency"
   username             = "admin"
   password             = var.db_password
   parameter_group_name = "default.mysql5.7"
@@ -29,6 +29,10 @@ resource "aws_db_instance" "crypto-API-V2-RDS-DB" {
   publicly_accessible = true
   skip_final_snapshot = true
   final_snapshot_identifier = "finalSnapshot"
+
+  provisioner "local-exec" {
+    command = "echo ${aws_db_instance.crypto-API-V2-RDS-DB.endpoint} > ./tmp/endpoint.txt"
+  }
 }
 
 output "dbEndpoint" {

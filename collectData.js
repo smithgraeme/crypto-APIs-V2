@@ -4,10 +4,10 @@ const got = require('got');
 var db;
 
 exports.handler = async function(event, context, callback) {
+    context.callbackWaitsForEmptyEventLoop = true;
+
     console.log(JSON.stringify(event));
     console.log("Target coin count: " + event.coinCount);
-    
-    context.callbackWaitsForEmptyEventLoop = true;
 
     const options = {
         json: true,
@@ -28,7 +28,7 @@ exports.handler = async function(event, context, callback) {
         host: process.env.host,
         user: process.env.username,
         password: process.env.password,
-        database: "cryptocurrency",
+        database: process.env.database,
     });
 
     const existingCoins = await getExistingCoins();

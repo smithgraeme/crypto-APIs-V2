@@ -1,0 +1,27 @@
+CREATE TABLE `coin` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `identifier` varchar(255) DEFAULT NULL,
+  `symbol` varchar(255) DEFAULT NULL,
+  `iconURL` varchar(255) DEFAULT NULL,
+  `marketCapUSD` double DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_name` (`name`),
+  KEY `idx_identifier` (`identifier`),
+  KEY `idx_marketCap` (`marketCapUSD`)
+) ENGINE=InnoDB AUTO_INCREMENT=2690 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `coinPrices` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `priceUSD` double DEFAULT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `coinIdentifier` varchar(255) NOT NULL DEFAULT '',
+  `summaryLevel` int(11) NOT NULL DEFAULT '1',
+  `dataSource` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `timestamp` (`timestamp`,`coinIdentifier`),
+  KEY `idx_priceUSD` (`priceUSD`),
+  KEY `idx_price_coin` (`priceUSD`,`coinIdentifier`),
+  KEY `idx_coin_price` (`coinIdentifier`,`priceUSD`),
+  KEY `idx_coin_timestamp` (`coinIdentifier`,`timestamp`)
+) ENGINE=InnoDB AUTO_INCREMENT=16188233 DEFAULT CHARSET=latin1;

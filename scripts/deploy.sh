@@ -1,9 +1,11 @@
-# run from the parent of the scripts directory (one level up)
+#!/bin/bash
+set -e
 
-echo "Deploying"
-echo $env_name
-pwd
+# run from the parent of the scripts directory (one level up)
+echo "Deploying to stage ${stage}"
 
 terraform init
-terraform workspace select $env_name || terraform workspace new $env_name
-terraform apply -var db_password="$(cat tmp/DB_PW)" -auto-approve
+terraform workspace select $stage || terraform workspace new $stage
+terraform apply -var db_password="${dbPassword}" -auto-approve
+
+sls deploy --host "$(terraform output dbAddress)"

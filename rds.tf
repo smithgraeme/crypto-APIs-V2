@@ -29,14 +29,14 @@ resource "aws_db_instance" "crypto-API-V2-RDS-DB" {
   publicly_accessible = true
   skip_final_snapshot = true
   final_snapshot_identifier = "finalSnapshot"
-
-  provisioner "local-exec" {
-    command = "echo ${aws_db_instance.crypto-API-V2-RDS-DB.endpoint} > ./tmp/endpoint.txt"
-  }
 }
 
 output "dbEndpoint" {
   value = aws_db_instance.crypto-API-V2-RDS-DB.endpoint
+}
+
+output "dbAddress" {
+  value = aws_db_instance.crypto-API-V2-RDS-DB.address
 }
 
 output "dbUsername" {

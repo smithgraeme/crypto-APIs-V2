@@ -7,11 +7,14 @@ provider:
   memorySize: 128
   timeout: 7
   endpointType: regional
+  stage: ${env:stage}
+  tenant: ""
+  app: ""
   environment:
-    coinmarketcapProApiKey: ${opt:coinmarketcapProApiKey}
+    coinmarketcapProApiKey: ${env:coinmarketcapProApiKey}
     host: ${opt:host}
-    user: admin
-    password: ${opt:password}
+    username: admin
+    password: ${env:dbPassword}
 
   iamRoleStatements:
    - Effect: "Allow"
@@ -24,7 +27,9 @@ functions:
     handler: collectData.handler
     events:
      - schedule:
-         name: collectData
+         name: collectDataSchedule
          description: Collects crypto data from API and records it in DB.
-         rate: rate(10 minutes)
-         enabled: false
+         rate: rate(2 minutes)
+         enabled: true
+         input:
+           coinCount: 5

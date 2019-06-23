@@ -1,0 +1,23 @@
+{
+  "name": "crypto-apis-v2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "collectData.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smithgraeme/crypto-APIs-V2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smithgraeme/crypto-APIs-V2/issues"
+  },
+  "homepage": "https://github.com/smithgraeme/crypto-APIs-V2#readme",
+  "dependencies": {
+    "got": "^9.6.0",
+    "mysql": "^2.17.1"
+  }
+}

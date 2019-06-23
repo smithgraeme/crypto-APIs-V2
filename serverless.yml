@@ -1,0 +1,21 @@
+service:
+  name: crypto-API-V2
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  memorySize: 128
+  timeout: 7
+  endpointType: regional
+
+  iamRoleStatements:
+   - Effect: "Allow"
+     Action:
+       - "s3:Get*"
+     Resource: "*"
+
+functions:
+  helloworld:
+    handler: collectData.handler
+    events:
+     - http: get helloworld

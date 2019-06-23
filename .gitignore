@@ -24,3 +24,10 @@ override.tf.json
 .DS_store
 dev
 tmp
+
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless

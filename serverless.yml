@@ -3,10 +3,15 @@ service:
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs8.10
   memorySize: 128
   timeout: 7
   endpointType: regional
+  environment:
+    coinmarketcapProApiKey: ${opt:coinmarketcapProApiKey}
+    host: ${opt:host}
+    user: admin
+    password: ${opt:password}
 
   iamRoleStatements:
    - Effect: "Allow"
@@ -15,7 +20,11 @@ provider:
      Resource: "*"
 
 functions:
-  helloworld:
+  collectData:
     handler: collectData.handler
     events:
-     - http: get helloworld
+     - schedule:
+         name: collectData
+         description: Collects crypto data from API and records it in DB.
+         rate: rate(10 minutes)
+         enabled: false
